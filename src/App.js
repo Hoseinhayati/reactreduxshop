@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Products from "./Components/Products";
+import Cart from "./Components/Cart";
+import { connect } from "react-redux";
 
-function App() {
+ 
+const App = ({ shoppingCart }) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App p-1" style={{ direction: "rtl", textAlign: "right" }}>
+      <div className="bg-dark text-white p-2">
+        تعداد در سبد خرید{" "}
+        <span className="badge badge-success">{shoppingCart.length}</span>
+      </div>
+      <div className="row m-0">
+        <div className="col-md-12">
+          <Products />
+        </div>
+        <div className="col-md-12">
+          <Cart />
+        </div>
+      </div>
     </div>
   );
-}
+};
 
-export default App;
+ 
+export default connect(state => {
+  return {
+    shoppingCart: state.shoppingCart
+  };
+})(App);
